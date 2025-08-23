@@ -58,7 +58,7 @@ age=18
 
 # Basic if statement
 if [ "$num" -le 10 ]; then
-    echo "Number is greater than 10"
+    echo "Number is less than or equal to 10"
 fi
 
 # If-else
