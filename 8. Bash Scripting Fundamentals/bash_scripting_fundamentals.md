@@ -216,7 +216,7 @@ done
 * `IFS=`: This sets the Internal Field Separator to empty. This prevents read from performing word splitting and preserves leading/trailing whitespace in the line variable.
 * `read -r line`: The `read` command reads a line from standard input and stores it in the `line` variable. The `-r` option prevents backslash escapes from being interpreted, ensuring the raw content of the line is read.
 * `do ... done`: This defines the block of commands to be executed for each line read.
-* `< "file.txt"`: This redirects the content of my_data.txt to the standard input of the while loop, allowing read to consume it line by line.
+* `< "file.txt"`: This redirects the content of file.txt to the standard input of the while loop, allowing read to consume it line by line.
 
 Until Loops
 ```bash
