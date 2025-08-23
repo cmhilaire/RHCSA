@@ -39,6 +39,32 @@ Example:
 passwd alice
 ```
 
+### 2.1 `chpasswd` – Set or Change User Password
+An unsafe approch is to use `chpasswd`. It provides a non-interactive way to set passwords, which is useful in a devlopement environment.
+Example:
+```bash
+# Single user
+echo "john:Secret123" | chpasswd
+
+# Multi user
+echo -e "alice:Passw0rd\nbob:MyPass123" | chpasswd
+
+# here-string (Requires Bash)
+chpasswd <<< "john:Secret123"
+```
+
+🔍 Explanation:
+* echo "username:password" → Prints the string username:password.
+* | (pipe) → Sends that string to the standard input of the next command.
+* chpasswd → Reads username:password pairs from standard input and updates the password for the specified user.
+* <<< is a here-string in Bash, which sends the given string directly to the standard input of the command.
+
+
+🔧 Notes: Avoid Hardcoding Passwords
+* Writing plain-text passwords directly in scripts `(echo "user:password" | chpasswd)` is unsafe.
+* Anyone with access to the script or shell history can read the password.
+
+
 ### 3. `usermod` – Modify an Existing User
 ```bash
 usermod [options] username
