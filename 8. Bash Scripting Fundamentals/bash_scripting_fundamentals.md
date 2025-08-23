@@ -197,14 +197,12 @@ while [ $counter -le 5 ]; do
     ((counter++))
 done
 
+
 # Read file line by line
 while IFS= read -r line; do
     echo "Line: $line"
 done < "file.txt"
 
-# IFS = Internal Field Separator, is a special variable in Bash scripting that determines 
-# how strings are split into words. By default, it is set to space, tab, and newline, but 
-# it can be changed to customize how fields in a string are separated,
 
 # Infinite loop with break
 while true; do
@@ -215,6 +213,10 @@ while true; do
     echo "Executing: $cmd"
 done
 ```
+* `IFS=`: This sets the Internal Field Separator to empty. This prevents read from performing word splitting and preserves leading/trailing whitespace in the line variable.
+* `read -r line`: The `read` command reads a line from standard input and stores it in the `line` variable. The `-r` option prevents backslash escapes from being interpreted, ensuring the raw content of the line is read.
+* `do ... done`: This defines the block of commands to be executed for each line read.
+* `< "file.txt"`: This redirects the content of my_data.txt to the standard input of the while loop, allowing read to consume it line by line.
 
 Until Loops
 ```bash
