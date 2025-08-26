@@ -48,9 +48,9 @@ umask 027
 ```
 
 ### 6. Directory Access Control
-r → List contents
-w → Add/remove files
-x → Enter directory
+* `r` → List contents
+* `w` → Add/remove files
+* `x` → Enter directory
 
 ---
 
@@ -112,15 +112,83 @@ Now nobody (not even owner) can access until permissions are reset.
 
 
 ### Step 7: Special Permissions
-Setuid → Run as file owner.  
-Setgid → New files inherit group.  
-Sticky bit → Only owner can delete files in directory.  
+#### 1. setuid (Set User ID)
+🔹 What it does:
 
-Example:
+When a binary with setuid is executed, it runs with the permissions of the file owner, not the user who launched it.
 
+Example: /usr/bin/passwd has setuid so normal users can change their own password (which updates /etc/shadow, a root-owned file).
+
+🔹 Example Commands:   
+Symbolic:
+```bash
+touch /company/hr/my_file.txt
+chmod u+s /company/hr/my_file.txt
+ls -l /company/hr/my_file.txt
+# -rwsr-xr-x 1 root root ...
+# Note the "s" in place of "x" for the user.
+```
+Numeric:
+```bash
+chmod 4755 /company/hr/my_file.txt
+```
+* `4` = setuid
+* `755` = rwxr-xr-x normal permissions
+
+#### 2. setgid (Set Group ID)
+🔹 What it does:
+
+On files: runs with the group’s permissions of the file.
+
+On directories: new files inside inherit the directory’s group, not the creator’s primary group.
+
+🔹 Example Commands:   
+Symbolic:
 ```bash
 chmod g+s /company/finance
+ls -ld /company/finance
+# drwxr-sr-x 2 user devs ...
+# Note the "s" in the group field.
 ```
+
+Numeric:
+```bash
+chmod 2755 /company/finance
+```
+* `2` = setgid
+* `755` = rwxr-xr-x normal permissions
+
+#### 3. Sticky Bit
+🔹 What it does:
+
+On directories: prevents users from deleting/renaming files unless they own the file or are root.
+
+Common example: /tmp has sticky bit.
+
+🔹 Example Commands:   
+Symbolic:
+```bash
+chmod +t /company
+ls -ld /company
+# drwxrwxrwt 9 root root ...
+# Note the "t" at the end.
+```
+
+Numeric:
+```bash
+chmod 1777 /company
+```
+* `1` = sticky bit
+* `777` = rwxrwxrwx normal permissions
+
+
+#### Quick reference table
+| Special Bit | Symbolic         | Numeric           | Example Usage                                   |
+| ----------- | ---------------- | ----------------- | ----------------------------------------------- |
+| **setuid**  | `chmod u+s file` | `chmod 4755 file` | Run program as file owner (e.g., `passwd`)      |
+| **setgid**  | `chmod g+s dir`  | `chmod 2755 dir`  | Files inherit group; programs run with group ID |
+| **sticky**  | `chmod +t dir`   | `chmod 1777 dir`  | Only owner can delete (e.g., `/tmp`)            |
+
 
 ---   
 
