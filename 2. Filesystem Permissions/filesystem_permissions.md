@@ -52,6 +52,24 @@ umask 027
 * `w` → Add/remove files
 * `x` → Enter directory
 
+
+### 7. Listing classify
+List files with type indicators, making it easier to distinguish directories, executables, and special files. If you run:
+```bash
+ls -F
+```
+
+If you see something like:
+```bash
+Documents/  script.sh* my_socket=  link@  notes.txt
+```
+
+- `Documents/` → a directory
+- `script.sh*` → an executable file
+- `my_socket=` a socket
+- `link@` → a symbolic link
+- `notes.txt` → a regular file
+
 ---
 
 ## 🏢 Practice Scenario: File Permissions
