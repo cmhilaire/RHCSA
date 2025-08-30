@@ -61,7 +61,7 @@ ls -F
 
 If you see something like:
 ```bash
-Documents/  script.sh* my_socket=  link@  notes.txt
+Documents/  script.sh*  my_socket=  link@  notes.txt  my_shared_file+  my_secured_file.
 ```
 
 - `Documents/` → a directory
@@ -69,6 +69,8 @@ Documents/  script.sh* my_socket=  link@  notes.txt
 - `my_socket=` a socket
 - `link@` → a symbolic link
 - `notes.txt` → a regular file
+- `my_shared_file+` → an extended attributes (like ACLs)
+- `my_secured_file.` → a SELinux security context associated with it
 
 ---
 
