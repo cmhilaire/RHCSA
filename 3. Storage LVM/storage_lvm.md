@@ -6,6 +6,7 @@ This guide explains **basic LVM storage management commands in Linux** with defi
 
 ## 🔎 Visual Overview
 
+<!-- 
 ### ASCII Diagram
 +--------------------------------------------------------------+
 | VMware/UTM / Hypervisor Layer |
@@ -47,7 +48,8 @@ v
 +--------------------------------------------------------------+
 
 
----
+--- 
+-->
 
 ### Mermaid Diagram
 ```mermaid
@@ -61,11 +63,10 @@ flowchart TD
 ```
 ---
 <!-- 
-https://mermaid.ink/img/pako:eNpNks1u6jAQRl9lNOtAfiFpFle6JYUNSCzaLJqgypcMwSKOI8dJ4SLevU6gVWflsc_5bEtzxb0sCGM8VPJzf2RKw2uS12Dqb5ZuPpki--11AylXumMVJLw9gV1Qb7fFvx1MJn_gOVvzujvD1shcc1n_nLsW6EtDENHuHvk8Cotse7y0fG_iUll1gmCbwgSafq-I6W92MbJJ9kBWSnYNpCsD9uUdhIJp9tGXDyEZhZdsLcvf2eshu-p_K1X_UF5GZZkteUXtpdUkQJwO7ZTOOgCp4HxoH-RyJFfZRna1biSvNdii1vaQt0MLS8ULjLXqyEJBSrChxesg56iPJCjH2CwLpk455vXNOA2r36UU35r5YHnE-MCq1nRdY6Ip4axUTPzsKqoLUovhERi7fjSGYHzFM8Ze5E7ngR94zlP45M69wMILxn44DfwwiPyZ5zp-EEU3C_-PtzrTKJw5pry5E4aON_MtpIJrqTb3kRgn4_YFM-6p6w?type=png
+![LVM Diagram](https://mermaid.ink/img/pako:eNpNks1u6jAQRl9lNOtAfiFpFle6JYUNSCzaLJqgypcMwSKOI8dJ4SLevU6gVWflsc_5bEtzxb0sCGM8VPJzf2RKw2uS12Dqb5ZuPpki--11AylXumMVJLw9gV1Qb7fFvx1MJn_gOVvzujvD1shcc1n_nLsW6EtDENHuHvk8Cotse7y0fG_iUll1gmCbwgSafq-I6W92MbJJ9kBWSnYNpCsD9uUdhIJp9tGXDyEZhZdsLcvf2eshu-p_K1X_UF5GZZkteUXtpdUkQJwO7ZTOOgCp4HxoH-RyJFfZRna1biSvNdii1vaQt0MLS8ULjLXqyEJBSrChxesg56iPJCjH2CwLpk455vXNOA2r36UU35r5YHnE-MCq1nRdY6Ip4axUTPzsKqoLUovhERi7fjSGYHzFM8Ze5E7ngR94zlP45M69wMILxn44DfwwiPyZ5zp-EEU3C_-PtzrTKJw5pry5E4aON_MtpIJrqTb3kRgn4_YFM-6p6w?type=png  "Logical Volume Management Process")
 ---
 https://mermaid.live/edit#pako:eNpNks1u6jAQRl9lNOtAfiFpFle6JYUNSCzaLJqgypcMwSKOI8dJ4SLevU6gVWflsc_5bEtzxb0sCGM8VPJzf2RKw2uS12Dqb5ZuPpki--11AylXumMVJLw9gV1Qb7fFvx1MJn_gOVvzujvD1shcc1n_nLsW6EtDENHuHvk8Cotse7y0fG_iUll1gmCbwgSafq-I6W92MbJJ9kBWSnYNpCsD9uUdhIJp9tGXDyEZhZdsLcvf2eshu-p_K1X_UF5GZZkteUXtpdUkQJwO7ZTOOgCp4HxoH-RyJFfZRna1biSvNdii1vaQt0MLS8ULjLXqyEJBSrChxesg56iPJCjH2CwLpk455vXNOA2r36UU35r5YHnE-MCq1nRdY6Ip4axUTPzsKqoLUovhERi7fjSGYHzFM8Ze5E7ngR94zlP45M69wMILxn44DfwwiPyZ5zp-EEU3C_-PtzrTKJw5pry5E4aON_MtpIJrqTb3kRgn4_YFM-6p6w
 -->
-![LVM Diagram](https://mermaid.ink/img/pako:eNpNks1u6jAQRl9lNOtAfiFpFle6JYUNSCzaLJqgypcMwSKOI8dJ4SLevU6gVWflsc_5bEtzxb0sCGM8VPJzf2RKw2uS12Dqb5ZuPpki--11AylXumMVJLw9gV1Qb7fFvx1MJn_gOVvzujvD1shcc1n_nLsW6EtDENHuHvk8Cotse7y0fG_iUll1gmCbwgSafq-I6W92MbJJ9kBWSnYNpCsD9uUdhIJp9tGXDyEZhZdsLcvf2eshu-p_K1X_UF5GZZkteUXtpdUkQJwO7ZTOOgCp4HxoH-RyJFfZRna1biSvNdii1vaQt0MLS8ULjLXqyEJBSrChxesg56iPJCjH2CwLpk455vXNOA2r36UU35r5YHnE-MCq1nRdY6Ip4axUTPzsKqoLUovhERi7fjSGYHzFM8Ze5E7ngR94zlP45M69wMILxn44DfwwiPyZ5zp-EEU3C_-PtzrTKJw5pry5E4aON_MtpIJrqTb3kRgn4_YFM-6p6w?type=png  "Logical Volume Management Process")
 ---
 
 ## 🔑 Why Use LVM?
