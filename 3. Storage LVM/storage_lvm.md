@@ -6,6 +6,7 @@ This guide explains **basic LVM storage management commands in Linux** with defi
 
 ## 🔎 Visual Overview
 
+<!-- 
 ### ASCII Diagram
 +--------------------------------------------------------------+
 | VMware/UTM / Hypervisor Layer |
@@ -47,7 +48,8 @@ v
 +--------------------------------------------------------------+
 
 
----
+--- 
+-->
 
 ### Mermaid Diagram
 ```mermaid
@@ -61,11 +63,10 @@ flowchart TD
 ```
 ---
 <!-- 
-https://mermaid.ink/img/pako:eNpNks1u6jAQRl9lNOtAfiFpFle6JYUNSCzaLJqgypcMwSKOI8dJ4SLevU6gVWflsc_5bEtzxb0sCGM8VPJzf2RKw2uS12Dqb5ZuPpki--11AylXumMVJLw9gV1Qb7fFvx1MJn_gOVvzujvD1shcc1n_nLsW6EtDENHuHvk8Cotse7y0fG_iUll1gmCbwgSafq-I6W92MbJJ9kBWSnYNpCsD9uUdhIJp9tGXDyEZhZdsLcvf2eshu-p_K1X_UF5GZZkteUXtpdUkQJwO7ZTOOgCp4HxoH-RyJFfZRna1biSvNdii1vaQt0MLS8ULjLXqyEJBSrChxesg56iPJCjH2CwLpk455vXNOA2r36UU35r5YHnE-MCq1nRdY6Ip4axUTPzsKqoLUovhERi7fjSGYHzFM8Ze5E7ngR94zlP45M69wMILxn44DfwwiPyZ5zp-EEU3C_-PtzrTKJw5pry5E4aON_MtpIJrqTb3kRgn4_YFM-6p6w?type=png
+![LVM Diagram](https://mermaid.ink/img/pako:eNpNks1u6jAQRl9lNOtAfiFpFle6JYUNSCzaLJqgypcMwSKOI8dJ4SLevU6gVWflsc_5bEtzxb0sCGM8VPJzf2RKw2uS12Dqb5ZuPpki--11AylXumMVJLw9gV1Qb7fFvx1MJn_gOVvzujvD1shcc1n_nLsW6EtDENHuHvk8Cotse7y0fG_iUll1gmCbwgSafq-I6W92MbJJ9kBWSnYNpCsD9uUdhIJp9tGXDyEZhZdsLcvf2eshu-p_K1X_UF5GZZkteUXtpdUkQJwO7ZTOOgCp4HxoH-RyJFfZRna1biSvNdii1vaQt0MLS8ULjLXqyEJBSrChxesg56iPJCjH2CwLpk455vXNOA2r36UU35r5YHnE-MCq1nRdY6Ip4axUTPzsKqoLUovhERi7fjSGYHzFM8Ze5E7ngR94zlP45M69wMILxn44DfwwiPyZ5zp-EEU3C_-PtzrTKJw5pry5E4aON_MtpIJrqTb3kRgn4_YFM-6p6w?type=png  "Logical Volume Management Process")
 ---
 https://mermaid.live/edit#pako:eNpNks1u6jAQRl9lNOtAfiFpFle6JYUNSCzaLJqgypcMwSKOI8dJ4SLevU6gVWflsc_5bEtzxb0sCGM8VPJzf2RKw2uS12Dqb5ZuPpki--11AylXumMVJLw9gV1Qb7fFvx1MJn_gOVvzujvD1shcc1n_nLsW6EtDENHuHvk8Cotse7y0fG_iUll1gmCbwgSafq-I6W92MbJJ9kBWSnYNpCsD9uUdhIJp9tGXDyEZhZdsLcvf2eshu-p_K1X_UF5GZZkteUXtpdUkQJwO7ZTOOgCp4HxoH-RyJFfZRna1biSvNdii1vaQt0MLS8ULjLXqyEJBSrChxesg56iPJCjH2CwLpk455vXNOA2r36UU35r5YHnE-MCq1nRdY6Ip4axUTPzsKqoLUovhERi7fjSGYHzFM8Ze5E7ngR94zlP45M69wMILxn44DfwwiPyZ5zp-EEU3C_-PtzrTKJw5pry5E4aON_MtpIJrqTb3kRgn4_YFM-6p6w
 -->
-![LVM Diagram](https://mermaid.ink/img/pako:eNpNks1u6jAQRl9lNOtAfiFpFle6JYUNSCzaLJqgypcMwSKOI8dJ4SLevU6gVWflsc_5bEtzxb0sCGM8VPJzf2RKw2uS12Dqb5ZuPpki--11AylXumMVJLw9gV1Qb7fFvx1MJn_gOVvzujvD1shcc1n_nLsW6EtDENHuHvk8Cotse7y0fG_iUll1gmCbwgSafq-I6W92MbJJ9kBWSnYNpCsD9uUdhIJp9tGXDyEZhZdsLcvf2eshu-p_K1X_UF5GZZkteUXtpdUkQJwO7ZTOOgCp4HxoH-RyJFfZRna1biSvNdii1vaQt0MLS8ULjLXqyEJBSrChxesg56iPJCjH2CwLpk455vXNOA2r36UU35r5YHnE-MCq1nRdY6Ip4axUTPzsKqoLUovhERi7fjSGYHzFM8Ze5E7ngR94zlP45M69wMILxn44DfwwiPyZ5zp-EEU3C_-PtzrTKJw5pry5E4aON_MtpIJrqTb3kRgn4_YFM-6p6w?type=png  "Logical Volume Management Process")
 ---
 
 ## 🔑 Why Use LVM?
@@ -171,7 +172,7 @@ Expands `my_vg` to include new physical volume.
 
 ### 5. `lvextend` – Extend Logical Volume
 ```bash
-lvextend -L +5G /dev/my_vg/my_lv
+lvextend -r -L +5G /dev/my_vg/my_lv
 ```
 Expands `my_lv` by 5GB.   
 
@@ -194,14 +195,20 @@ vgmerge target_vg source_vg
 Merges two volume groups into `target_vg`.   
 
 ---
-### 8. `resize2fs`/`xfs_growfs` Format the Logical Volume
+### 8. `mkfs` Format the Logical Volume
 ```bash
-resize2fs /dev/my_vg/my_lv   # Format filesytem for ext4
-xfs_growfs /mnt/data         # Format filesystem for XFS, takes /mount/point as argument
+mkfs.ext4 /dev/my_vg/my_lv    # For an ext4 filesystem (common, general-purpose)
+mkfs.xfs /dev/my_vg/my_lv     # For an XFS filesystem (high-performance, good for large files)
+```
+---
+### 9. `resize2fs`/`xfs_growfs` Reformat the Logical Volume
+```bash
+resize2fs /dev/my_vg/my_lv   # Reformat ext4 filesytem
+xfs_growfs /mnt/data         # Reformat XFS filesystem, takes /mount/point as argument
 ```
 ---
 
-### 9. `Mount` Logical Volume
+### 10. `Mount` Logical Volume
 ```bash
 mount /dev/my_vg/my_lv /mnt/data
 ```
@@ -243,7 +250,7 @@ lvcreate -n data_lv -L 5G data_vg
 
 ### Step 6: Format & Mount
 ```bash
-mkfs.ext4 /dev/data_vg/data_lv
+mkfs.ext4 /dev/data_vg/data_lv  # For an ext4 filesystem (common, general-purpose)
 mkdir /mnt/data
 mount /dev/data_vg/data_lv /mnt/data
 ```
