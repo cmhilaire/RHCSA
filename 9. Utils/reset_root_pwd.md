@@ -9,7 +9,7 @@ You have lost the **root password** and there are **no other admin (sudo) accoun
 
 ### 1️⃣ Reboot and Interrupt the GRUB Menu
 1. Reboot the system.  
-2. When the **GRUB** menu appears, highlight the default boot entry.  
+2. When the **GRUB** menu appears, highlight the recovery boot entry.  
 3. Press **`e`** to **edit** the kernel boot parameters.
 
 ---
